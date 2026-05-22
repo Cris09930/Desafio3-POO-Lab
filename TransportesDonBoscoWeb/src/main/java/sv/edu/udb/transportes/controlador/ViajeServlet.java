@@ -74,6 +74,11 @@ public class ViajeServlet extends HttpServlet {
      * Maneja las peticiones POST (registro de un nuevo viaje).
      * Recibe los datos del formulario, calcula el costo según el tipo de vehículo,
      * guarda el viaje en la base de datos y redirige al listado de viajes.
+     *
+     * Validaciones aplicadas:
+     * - Verificar que no haya campos vacíos
+     * - Verificar que la distancia sea un número válido y positivo
+     * - Verificar que se haya seleccionado un conductor y un vehículo
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -81,11 +86,95 @@ public class ViajeServlet extends HttpServlet {
 
         // Obtener parámetros del formulario
         String dui = req.getParameter("duiConductor");
-        int idVehiculo = Integer.parseInt(req.getParameter("idVehiculo"));
-        double distancia = Double.parseDouble(req.getParameter("distanciaKm"));
+        String idVehiculoStr = req.getParameter("idVehiculo");
+        String distanciaStr = req.getParameter("distanciaKm");
 
-        // Obtener el vehículo para conocer su tipo y calcular la tarifa correspondiente
+        // Validación 1: Verificar que el conductor esté seleccionado
+        if (dui == null || dui.trim().isEmpty()) {
+            req.getSession().setAttribute("mensajeError", "Debe seleccionar un conductor");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+
+        // Validación 2: Verificar que el vehículo esté seleccionado
+        if (idVehiculoStr == null || idVehiculoStr.trim().isEmpty()) {
+            req.getSession().setAttribute("mensajeError", "Debe seleccionar un vehículo");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+
+        // Validación 3: Verificar que la distancia no esté vacía
+        if (distanciaStr == null || distanciaStr.trim().isEmpty()) {
+            req.getSession().setAttribute("mensajeError", "Debe ingresar la distancia del viaje");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+
+        int idVehiculo;
+        double distancia;
+
+        // Validación 4: Verificar que el ID del vehículo sea un número válido
+        try {
+            idVehiculo = Integer.parseInt(idVehiculoStr);
+            if (idVehiculo <= 0) {
+                req.getSession().setAttribute("mensajeError", "ID de vehículo no válido");
+                resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            req.getSession().setAttribute("mensajeError", "ID de vehículo no válido");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+
+        // Validación 5: Verificar que la distancia sea un número válido y positivo
+        try {
+            distancia = Double.parseDouble(distanciaStr);
+            if (distancia <= 0) {
+                req.getSession().setAttribute("mensajeError", "La distancia debe ser mayor a 0 kilómetros");
+                resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+                return;
+            }
+            if (distancia > 10000) {
+                req.getSession().setAttribute("mensajeError", "La distancia no puede superar los 10,000 km");
+                resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            req.getSession().setAttribute("mensajeError", "Debe ingresar un número válido para la distancia");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+
+        // Validación 6: Verificar que el vehículo exista en la base de datos
         Vehiculo v = vehiculoDAO.obtenerPorId(idVehiculo);
+        if (v == null) {
+            req.getSession().setAttribute("mensajeError", "El vehículo seleccionado no existe");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+
+        // Validación 7: Verificar que el vehículo esté en estado "Al día"
+        if (!"Al día".equals(v.getEstadoMantenimiento())) {
+            req.getSession().setAttribute("mensajeError", "El vehículo seleccionado no está disponible (estado: " + v.getEstadoMantenimiento() + ")");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+
+        // Validación 8: Verificar que el conductor exista y tenga licencia vigente
+        Conductor c = conductorDAO.obtenerPorDui(dui);
+        if (c == null) {
+            req.getSession().setAttribute("mensajeError", "El conductor seleccionado no existe");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+        if (!c.isLicenciaVigente()) {
+            req.getSession().setAttribute("mensajeError", "El conductor seleccionado no tiene licencia vigente");
+            resp.sendRedirect(req.getContextPath() + "/ViajeServlet?accion=nuevo");
+            return;
+        }
+
+        // Calcular tarifa según el tipo de vehículo
         double tarifa = ("Moto".equals(v.getNombreTipo())) ? 0.05 : 0.20; // Moto: $0.05, Camión: $0.20
         double costo = distancia * tarifa; // Calcular costo total del viaje
 
