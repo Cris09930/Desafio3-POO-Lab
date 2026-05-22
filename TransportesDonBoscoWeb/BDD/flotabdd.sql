@@ -18,7 +18,7 @@ CREATE TABLE `conductor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Volcado de datos para la tabla `conductor`
+-- Insercion de datos para la tabla `conductor`
 --
 
 INSERT INTO `conductor` (`dui`, `nombre_completo`, `edad`, `sexo`, `licencia_vigente`) VALUES
@@ -36,7 +36,7 @@ CREATE TABLE `tipo_vehiculo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tipo_vehiculo`
+-- Insercion  de datos para la tabla `tipo_vehiculo`
 --
 
 INSERT INTO `tipo_vehiculo` (`id_tipo`, `nombre_tipo`) VALUES
@@ -60,7 +60,7 @@ CREATE TABLE `vehiculo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Volcado de datos para la tabla `vehiculo`
+-- Insercion  de datos para la tabla `vehiculo`
 --
 
 INSERT INTO `vehiculo` (`id_vehiculo`, `id_tipo`, `marca`, `modelo`, `anio`, `dato_especifico`, `estado_mantenimiento`) VALUES
@@ -69,11 +69,6 @@ INSERT INTO `vehiculo` (`id_vehiculo`, `id_tipo`, `marca`, `modelo`, `anio`, `da
 (8, 1, 'JADJAJSD', 'adasd211', 2017, 29, 'Al día');
 
 -- --------------------------------------------------------
-
---
--- Índices para tablas volcadas (PRIMERO se agregan las claves)
---
-
 --
 -- Indices de la tabla `conductor`
 --
@@ -112,7 +107,7 @@ ALTER TABLE `vehiculo`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `viaje` (AHORA sí se puede crear)
+-- Estructura de tabla para la tabla `viaje`
 --
 
 CREATE TABLE IF NOT EXISTS `viaje` (
@@ -130,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `viaje` (
 -- --------------------------------------------------------
 
 --
--- Restricciones para tablas volcadas
+-- Restricciones para tablas 
 --
 
 --
