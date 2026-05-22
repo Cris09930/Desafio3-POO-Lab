@@ -71,25 +71,7 @@ INSERT INTO `vehiculo` (`id_vehiculo`, `id_tipo`, `marca`, `modelo`, `anio`, `da
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `viaje`
---
-
-CREATE TABLE IF NOT EXISTS `viaje` (
-    `id_viaje` INT NOT NULL AUTO_INCREMENT,
-    `dui_conductor` VARCHAR(10) NOT NULL,
-    `id_vehiculo` INT NOT NULL,
-    `distancia_km` DECIMAL(10,2) NOT NULL,
-    `costo` DECIMAL(10,2) NOT NULL,
-    `fecha_viaje` DATE NOT NULL,
-    PRIMARY KEY (`id_viaje`),
-    FOREIGN KEY (`dui_conductor`) REFERENCES `conductor`(`dui`) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (`id_vehiculo`) REFERENCES `vehiculo`(`id_vehiculo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- --------------------------------------------------------
-
---
--- Índices para tablas volcadas
+-- Índices para tablas volcadas (PRIMERO se agregan las claves)
 --
 
 --
@@ -126,6 +108,26 @@ ALTER TABLE `tipo_vehiculo`
 --
 ALTER TABLE `vehiculo`
   MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `viaje` (AHORA sí se puede crear)
+--
+
+CREATE TABLE IF NOT EXISTS `viaje` (
+    `id_viaje` INT NOT NULL AUTO_INCREMENT,
+    `dui_conductor` VARCHAR(10) NOT NULL,
+    `id_vehiculo` INT NOT NULL,
+    `distancia_km` DECIMAL(10,2) NOT NULL,
+    `costo` DECIMAL(10,2) NOT NULL,
+    `fecha_viaje` DATE NOT NULL,
+    PRIMARY KEY (`id_viaje`),
+    FOREIGN KEY (`dui_conductor`) REFERENCES `conductor`(`dui`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`id_vehiculo`) REFERENCES `vehiculo`(`id_vehiculo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Restricciones para tablas volcadas
