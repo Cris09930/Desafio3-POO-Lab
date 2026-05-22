@@ -1,0 +1,278 @@
+/*!
+ * Bootstrap v5.3.0 (https://getbootstrap.com/)
+ * Copyright 2011-2023 The Bootstrap Authors
+ */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css");
+
+/* ESTILOS PERSONALIZADOS PARA TRANSPORTES DON BOSCO */
+
+/* ESTILOS GLOBALES */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+/* ESTILOS PARA INDEX.JSP */
+body.index-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.hero-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.hero-card:hover {
+    transform: translateY(-5px);
+}
+
+.menu-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.menu-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.btn-custom {
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+/* ESTILOS COMUNES PARA PÁGINAS DE LISTADO */
+.page-header {
+    padding: 25px 0;
+    margin-bottom: 30px;
+    border-radius: 0 0 20px 20px;
+    color: white;
+}
+
+.page-header-conductores {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.page-header-vehiculos {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.page-header-viajes {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    color: #333;
+}
+
+.table-custom {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.table-custom thead {
+    background: #2c3e66;
+    color: white;
+}
+
+.table-custom tbody tr:hover {
+    background-color: #f8f9ff;
+    transition: 0.2s;
+}
+
+.btn-sm {
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.card-stats {
+    border-left: 5px solid #28a745;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* ESTILOS PARA FORMULARIOS */
+body.form-conductor-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body.form-vehiculo-page {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+body.form-viaje-page {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+}
+
+.form-card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border: none;
+}
+
+.card-header-conductor {
+    background: linear-gradient(135deg, #2c3e66 0%, #1a2a4a 100%);
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: none;
+    color: white;
+}
+
+.card-header-vehiculo {
+    background: linear-gradient(135deg, #0f5c4b 0%, #1a7a64 100%);
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: none;
+    color: white;
+}
+
+.card-header-viaje {
+    background: linear-gradient(135deg, #ff6a6a 0%, #ff9a6a 100%);
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: none;
+    color: white;
+}
+
+.form-control, .form-select {
+    border-radius: 12px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    transition: 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.25);
+}
+
+.btn-primary-gradient {
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+}
+
+.btn-primary-gradient:hover {
+    background: linear-gradient(90deg, #5a6fd6 0%, #6a3f8e 100%);
+    color: white;
+}
+
+.btn-vehiculo-gradient {
+    background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-weight: 600;
+    color: white;
+}
+
+.btn-vehiculo-gradient:hover {
+    background: linear-gradient(90deg, #0e7a6e 0%, #2bcb68 100%);
+    color: white;
+}
+
+.btn-viaje-gradient {
+    background: linear-gradient(90deg, #ff6a6a, #ff9a6a);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-weight: 600;
+    color: white;
+}
+
+.btn-viaje-gradient:hover {
+    background: linear-gradient(90deg, #e55a5a, #e58a5a);
+    color: white;
+}
+
+.btn-secondary {
+    border-radius: 50px;
+    padding: 10px 30px;
+}
+
+/* === ESTILOS PARA REPORTE.JSP === */
+body.reporte-page {
+    background: #eef2f3;
+}
+
+.report-header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.card-report {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    border-left: 5px solid #28a745;
+    background: white;
+}
+
+.highlight {
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* BADGES PERSONALIZADOS */
+.badge-mantenimiento {
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+
+.badge-licencia-vigente {
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+
+/* FOOTER */
+.footer-custom {
+    margin-top: 50px;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+/* UTILIDADES ADICIONALES */
+.rounded-pill-custom {
+    border-radius: 50px !important;
+}
+
+.shadow-soft {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+    transition: transform 0.2s ease;
+}
